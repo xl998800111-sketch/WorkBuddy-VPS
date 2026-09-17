@@ -5,7 +5,7 @@
 基于 [linuxserver/docker-webtop](https://github.com/linuxserver/docker-webtop) 架构与 `devtop/base` 镜像，针对 WorkBuddy 云端发布沙箱做了完整适配。
 
 ---### 只针对WorkBuddy国际版###---
-喜欢请👍️👍️👍️
+喜欢请⭐️⭐️⭐️
 
 ## 这套版本有什么不同
 
