@@ -4,7 +4,7 @@
 
 基于 [linuxserver/docker-webtop](https://github.com/linuxserver/docker-webtop) 架构与 `devtop/base` 镜像，针对 WorkBuddy 云端发布沙箱做了完整适配。
 
----
+---### 只针对WorkBuddy国际版###---
 
 ## 这套版本有什么不同
 
@@ -110,39 +110,7 @@ https://<sandbox-id>.sg.agentos-app.run
 
 ---
 
-## 文件清单
 
-| 文件 | 用途 | 必需 |
-|---|---|---|
-| `deploy.sh` | 部署脚本，唯一入口 | 是 |
-| `docker-compose.yml` | 容器编排（端口映射由脚本自动改写） | 是 |
-| `devtop-init-fix.sh` | 启动时自动修复（被 compose 挂载） | **是** |
-| `assets/config.toml` | Codex 默认配置（被 compose 挂载） | **是** |
-| `assets/images/` | 文档引用的截图 | 否 |
-| `README.md` | 本文件 | 否 |
-| `使用说明.md` | 说什么话触发部署、命令清单、注意事项 | 否 |
-| `DEPLOY.md` | 通用 Docker 环境的部署指南，保留备查 | 否 |
-| `LICENSE` | 开源许可 | 否 |
-| `.gitignore` | Git 忽略规则 | 否 |
-| `devtop-hotfix.sh` | 一次性运行时热修复脚本（手动执行） | 否 |
-| `webtop-env.md` | 中文输入法使用说明 | 否 |
-
-> `devtop-init-fix.sh` 和 `assets/config.toml` 被 `docker-compose.yml` 以**相对路径**挂载，缺任意一个容器都起不来。
-
-`config/` 目录是容器运行时自动生成的用户数据（桌面配置、缓存等），**不纳入版本控制**。
-
----
-
-## deploy.sh 用法
-
-```bash
-bash deploy.sh            # 完整部署：后台拉镜像起容器 + 前台常驻代理（发布时调用）
-bash deploy.sh --diag     # 只做环境探测，不部署
-bash deploy.sh --setup    # 只部署，不起代理
-bash deploy.sh --status   # 查看当前部署状态
-```
-
-`--diag` 会检查 Docker、守护进程、Compose、root 权限、`/workspace`、内存、磁盘、`/dev/shm`、外网与镜像仓库连通性，是判断"这个沙箱能不能跑容器"最快的方式。
 
 ### 手动命令行部署
 
@@ -163,31 +131,6 @@ bash deploy.sh             # 部署（常驻前台，占住沙箱唯一对外端
 
 ---
 
-## 桌面里有什么
-
-基于 `devtop/base`（Ubuntu 26.04 LTS），预装：
-
-**开发语言**：Python 3.14 · Node.js 22 · Go 1.24 · Rust 1.95 · Bun 1.3
-
-**开发工具**：Docker 29 + compose + buildx · Git 2.53 + git-lfs · code-server（含中文语言包）· Codex CLI · 完整编译链（gcc 15.2 / clang / cmake 4.2 / ninja / ccache）
-
-**CLI 增强**：fzf · bat · ripgrep · fd · jq · yq · direnv · tmux · tldr · btop
-
-**数据库客户端**：sqlite3 · postgresql-client · mariadb-client · redis-tools
-
-**中文环境**：`zh_CN.UTF-8` · Noto CJK 字体 · fcitx5 拼音输入法 · 中文桌面
-
-### 中文输入法
-
-| 快捷键 | 功能 |
-|---|---|
-| `Ctrl+Space` | 切换中英文 |
-| `Shift` | 临时切换英文 |
-| `Ctrl+.` | 全角/半角标点 |
-
-未启动时在桌面终端执行 `fcitx5 -d --replace`。详见 [webtop-env.md](webtop-env.md)。
-
----
 
 ## 运维
 
