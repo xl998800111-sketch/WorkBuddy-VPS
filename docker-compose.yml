@@ -1,0 +1,30 @@
+---
+# workbuddy-vps — WorkBuddy 开发桌面环境
+# 基于 devtop base 镜像，适配 CloudStudio 沙箱环境
+#
+# 密码通过 .env 文件注入，首次部署由 deploy.sh 自动生成随机密码。
+# 手动部署请先运行: bash deploy.sh
+services:
+  workbuddy-vps:
+    image: docker.cnb.cool/fuliai/devtop/base:1.8
+    container_name: workbuddy-vps
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+      - CUSTOM_USER=${CUSTOM_USER:-admin}
+      - PASSWORD=${PASSWORD}
+      - LC_ALL=zh_CN.UTF-8
+    volumes:
+      - ./config:/config
+      - /workspace:/workspace              # 挂载宿主 workspace，桌面内可见宿主文件
+      - /var/run/docker.sock:/var/run/docker.sock  # 共享宿主 Docker
+      - ./devtop-init-fix.sh:/custom-cont-init.d/devtop-init-fix.sh:ro  # 启动时自动修复环境兼容问题
+      - ./assets/config.toml:/defaults/devtop-config/config.toml:ro  # Codex 默认配置，由 init 脚本按需复制到 /config/.codex/
+    ports:
+      - 0.0.0.0:3000:3000
+      - 0.0.0.0:3001:3001
+    shm_size: "5gb"
+    restart: unless-stopped

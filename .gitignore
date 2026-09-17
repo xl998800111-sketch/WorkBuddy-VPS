@@ -1,0 +1,25 @@
+# 容器运行时数据（自动生成，不纳入版本控制）
+config/
+
+# Claude Code / CodeBuddy 工作目录
+.codebuddy/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# 部署信息文件（每次部署自动生成，含密码等敏感信息）
+deploy-info.txt
+.env
+
+# 内部分析文档（不纳入仓库）
+devtop-optimization-report.md
+webtop-deploy-experience.md
+
+# 临时文件
+*.tmp
+*.log
+*.pid
