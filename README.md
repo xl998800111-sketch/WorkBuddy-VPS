@@ -1,6 +1,6 @@
 # WorkBuddy-VPS
 
-把浏览器变成一个完整的**中文 Linux 开发桌面** —— 一句话发布，拿到公网链接，打开就是 XFCE 桌面。
+把WorkBuddy 沙箱变成中文 Linux 开发桌面** —— 一句话发布，拿到公网链接，打开就是 XFCE 桌面。
 
 基于 [linuxserver/docker-webtop](https://github.com/linuxserver/docker-webtop) 架构与 `devtop/base` 镜像，针对 WorkBuddy 云端发布沙箱做了完整适配。
 
